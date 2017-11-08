@@ -1,17 +1,18 @@
 
+
+
 function Letter(letter) {
     this.letter = letter;
-    this.display = "_";
-    this.correctGuess = false;
+    this.displayChar = "_";
 }
 
-Letter.prototype.displayLetter = function() {
-    if (this.correctGuess) {
-        this.display = this.letter;
+
+Letter.prototype.validateLetter = function(userInput) {
+    if (userInput === this.letter) {
+        this.displayChar = this.letter;
     }
-    return this.display;
+    return this.displayChar;
 }
 
-module.exports = {
-    Letter
-};
+
+module.exports = Letter;

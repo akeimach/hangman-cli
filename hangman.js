@@ -1,13 +1,18 @@
 
 var inquirer = require("inquirer");
-var word = require("./word.js");
-var guessesRemain = 10;
-var wordString = "eggplant";
-var currWordArr = new word.Word(wordString);
-var prevGuesses = [];
+var Game = require("./game.js");
+var Word = require("./word.js");
 
-function getLetter() {
-    currWordArr.displayWord();
+// var guessesRemain = 10;
+// var prevGuesses = [];
+var game = new Game();
+var word = new Word("eggplant");
+word.setWord();
+word.displayWord();
+userTurn();
+
+
+function userTurn() {
     inquirer.prompt([
         {
             type: "input",
@@ -22,24 +27,10 @@ function getLetter() {
             }
         }
     ]).then(function(response) {
-        if (wordString.indexOf(response.letter) !== -1) {
-            currWordArr.handleLetter(response.letter);
-            if (currWordArr.checkWin()) {
-                currWordArr.displayWord();
-                console.log("WINNER!");
-                return;
-            }
-        }
-        else if (prevGuesses.indexOf(response.letter) === -1) {
-            prevGuesses.push(response.letter);
-            guessesRemain--;
-            console.log("Guesses remaining: " + guessesRemain);
-        }
-        if (guessesRemain > 0) {
-            getLetter();
+        
+        word.displayWord(response.letter);
+        if (game.validateInput(response.letter)) {
+            userTurn();
         }
     });
 }
-
-currWordArr.initWord();
-getLetter();
