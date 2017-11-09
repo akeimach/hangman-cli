@@ -5,6 +5,8 @@ function Word(wordString) {
     this.wordString = wordString;
     this.wordLength = this.wordString.length;
     this.wordArr = [];
+    this.countCorrect = 0;
+    this.prevCountCorrect = 0;
 }
 
 
@@ -16,8 +18,13 @@ Word.prototype.setWord = function() {
 
 
 Word.prototype.displayWord = function(userInput) {
+    this.countCorrect = 0;
     for (var i = 0; i < this.wordLength; i++) {
-        process.stdout.write(this.wordArr[i].validateLetter(userInput));
+        var displayLetter = this.wordArr[i].validateLetter(userInput);
+        if (displayLetter !== "_") {
+            this.countCorrect++;
+        }
+        process.stdout.write(displayLetter);
         if (i < (this.wordLength - 1)) {
             process.stdout.write(" ");
         }

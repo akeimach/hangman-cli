@@ -3,14 +3,11 @@ var inquirer = require("inquirer");
 var Game = require("./game.js");
 var Word = require("./word.js");
 
-// var guessesRemain = 10;
-// var prevGuesses = [];
 var game = new Game();
 var word = new Word("eggplant");
 word.setWord();
 word.displayWord();
 userTurn();
-
 
 function userTurn() {
     inquirer.prompt([
@@ -27,10 +24,21 @@ function userTurn() {
             }
         }
     ]).then(function(response) {
-        
         word.displayWord(response.letter);
-        if (game.validateInput(response.letter)) {
-            userTurn();
+        if (word.countCorrect > word.prevCountCorrect) {
+            // another correct guess
+            if (word.countCorrect === word.wordLength) {
+                return console.log("YOU WON!");
+            }
+            word.prevCountCorrect = word.countCorrect;
+            game.storeInput(response.letter);
         }
+        else {
+            // if guess was incorrect, store input, decrement turns
+            if (game.checkGameStatus(response.letter)) {
+                return console.log("GAME OVER!");
+            }
+        }
+        userTurn();
     });
 }

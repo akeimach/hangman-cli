@@ -1,4 +1,4 @@
-var Letter = require("./letter.js");
+
 
 
 function Game() {
@@ -7,18 +7,24 @@ function Game() {
 }
 
 
-//TODO: check if game over
-//TODO: don't decrement turns if correct letter guessed
-
-Game.prototype.validateInput = function(userInput) {
+Game.prototype.storeInput = function(userInput) {
+    // if letter has not yet been guessed, add to array
     if (this.prevGuesses.indexOf(userInput) === -1) {
-        // they have not guessed this letter yet
         this.prevGuesses.push(userInput);
+        return true;
+    }
+    return false;
+}
+
+
+Game.prototype.checkGameStatus = function(userInput) {
+    if (this.storeInput(userInput)) { // store incorrect guess
         this.turnsRemaining--;
         console.log("Guesses remaining: " + this.turnsRemaining);
-    }
-    if (this.turnsRemaining > 0) {
-        return true;
+        if (!this.turnsRemaining) {
+            // if there are no turns remaining gameOver is true
+            return true;
+        }
     }
     return false;
 }
