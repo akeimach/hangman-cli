@@ -19,6 +19,7 @@ Word.prototype.setWord = function() {
 
 Word.prototype.displayWord = function(userInput) {
     this.countCorrect = 0;
+    console.log();
     for (var i = 0; i < this.wordLength; i++) {
         var displayLetter = this.wordArr[i].validateLetter(userInput);
         if (displayLetter !== "_") {
@@ -29,7 +30,7 @@ Word.prototype.displayWord = function(userInput) {
             process.stdout.write(" ");
         }
     }
-    console.log();
+    console.log("\n\n");
 }
 
 

@@ -19,12 +19,17 @@ Game.prototype.storeInput = function(userInput) {
 
 Game.prototype.checkGameStatus = function(userInput) {
     if (this.storeInput(userInput)) { // store incorrect guess
+        console.log("INCORRECT!\n");
         this.turnsRemaining--;
-        console.log("Guesses remaining: " + this.turnsRemaining);
+        console.log(this.turnsRemaining + " guesses remaining!\n");
         if (!this.turnsRemaining) {
             // if there are no turns remaining gameOver is true
+            console.log("GAME OVER!\n");
             return true;
         }
+    }
+    else {
+        console.log("REPEAT GUESS\n");
     }
     return false;
 }

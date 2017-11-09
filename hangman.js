@@ -4,10 +4,13 @@ var Game = require("./game.js");
 var Word = require("./word.js");
 
 var game = new Game();
-var word = new Word("eggplant");
+var word = new Word("pea soup");
 word.setWord();
 word.displayWord();
 userTurn();
+
+// TODO: add colors to correct and incorrect
+// TODO: add dictionary of random words, restart game for next word
 
 function userTurn() {
     inquirer.prompt([
@@ -27,17 +30,16 @@ function userTurn() {
         word.displayWord(response.letter);
         if (word.countCorrect > word.prevCountCorrect) {
             // another correct guess
+            console.log("CORRECT!\n");
             if (word.countCorrect === word.wordLength) {
-                return console.log("YOU WON!");
+                return console.log("YOU WON!\n");
             }
             word.prevCountCorrect = word.countCorrect;
             game.storeInput(response.letter);
         }
-        else {
+        else if (game.checkGameStatus(response.letter)) {
             // if guess was incorrect, store input, decrement turns
-            if (game.checkGameStatus(response.letter)) {
-                return console.log("GAME OVER!");
-            }
+            return;
         }
         userTurn();
     });

@@ -4,6 +4,9 @@
 function Letter(letter) {
     this.letter = letter;
     this.displayChar = "_";
+    if (this.letter === " ") {
+        this.displayChar = " ";
+    }
 }
 
 
