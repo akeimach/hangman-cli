@@ -1,18 +1,20 @@
 
 
 
-function Letter(letter) {
-    this.letter = letter;
+function Letter(initChar) {
+    this.hiddenChar = initChar;
     this.displayChar = "_";
-    if (this.letter === " ") {
-        this.displayChar = " ";
-    }
+    if (initChar === " ") this.displayChar = " ";
+    this.guessResult = "";
 }
 
 
-Letter.prototype.validateLetter = function(userInput) {
-    if (userInput === this.letter) {
-        this.displayChar = this.letter;
+Letter.prototype.validateLetter = function(guessChar) {
+    this.guessResult = "INCORRECT!";
+    if (guessChar === this.displayChar) this.guessResult = "REPEAT";
+    else if (guessChar === this.hiddenChar) {
+        this.displayChar = this.hiddenChar;
+        this.guessResult = "CORRECT!";
     }
     return this.displayChar;
 }
