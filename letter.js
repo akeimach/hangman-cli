@@ -2,7 +2,7 @@
 
 
 function Letter(initChar) {
-    this.hiddenChar = initChar;
+    this.hiddenChar = initChar.toLowerCase();
     this.displayChar = "_";
     if (initChar === " ") this.displayChar = " ";
     this.guessResult = "";

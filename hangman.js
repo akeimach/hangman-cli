@@ -4,10 +4,8 @@ var Word = require("./word.js");
 
 var game = new Game();
 var word = null;
-console.log("\n\nIT'S FOOD THEMED HANGMAN! GOOD LUCK!")
+console.log("\n\nIT'S FOOD THEMED HANGMAN! GOOD LUCK!");
 startRound();
-
-// TODO: check word for special characters, upper case?
 
 
 function startRound() {
@@ -36,8 +34,9 @@ function userTurn() {
             }
         }
     ]).then(function(response) {
-        word.displayWord(response.letter);
-        if (word.updateGame(response.letter)) {
+        var guessChar = response.letter.toLowerCase();
+        word.displayWord(guessChar);
+        if (word.updateGame(guessChar)) {
             // The round is over, win or loss occured
             inquirer.prompt([
                 {
