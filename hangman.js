@@ -8,14 +8,19 @@ var word = null;
 startRound();
 
 // TODO: add colors to correct and incorrect
-// TODO: add dictionary of random words, restart game for next word
 // TODO: check word for special characters
 // TODO: check for upper case?
 // TODO: check readme, compare to old hangman logic
+// TODO: show correct word if didn't win
 
 
 function startRound() {
-    word = new Word(game.selectWord());
+    var wordString = game.selectWord();
+    if (!wordString) {
+        console.log("You completed all the rounds!");
+        return;
+    }
+    word = new Word(wordString);
     word.setWord();
     word.displayWord();
     userTurn();

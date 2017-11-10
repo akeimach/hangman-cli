@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/akeimach/hangman-cli#readme",
   "dependencies": {
+    "food-words": "^1.1.0",
     "inquirer": "^3.3.0"
   }
 }
