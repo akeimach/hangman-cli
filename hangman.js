@@ -7,11 +7,7 @@ var word = null;
 
 startRound();
 
-// TODO: add colors to correct and incorrect
-// TODO: check word for special characters
-// TODO: check for upper case?
-// TODO: check readme, compare to old hangman logic
-// TODO: show correct word if didn't win
+// TODO: check word for special characters, upper case?
 
 
 function startRound() {

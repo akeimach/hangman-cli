@@ -39,9 +39,11 @@ Word.prototype.displayWord = function(guessChar) {
 
 Word.prototype.updateGame = function(guessChar) {
     if (this.turnResult !== "INCORRECT!") {
-        console.log(this.turnResult + "\n"); // repeat or correct
+        if (this.turnResult === "REPEAT") // repeat correct guess
+            console.log("\x1b[33m" + this.turnResult + "\n");
+        else console.log("\x1b[32m" + this.turnResult + "\n");
         if (this.countCorrect === this.wordLength) {
-            console.log("YOU WON\n");
+            console.log("\x1b[35mYOU WON\n");
             return true;
         }
     }
@@ -49,14 +51,14 @@ Word.prototype.updateGame = function(guessChar) {
         // returns false if already guessed
         this.prevGuesses.push(guessChar);
         this.turnsRemaining--;
-        console.log(this.turnsRemaining + " guesses remaining!\n");
+        console.log("\x1b[31m" + this.turnResult + "\n" + this.turnsRemaining + " guesses remaining!\n");
         if (!this.turnsRemaining) {
             // if there are no turns remaining gameOver is true
-            console.log("GAME OVER!\n");
+            console.log("\x1b[35mGAME OVER!\nThe correct word was " + this.wordString + "\n");
             return true;
         }
     }
-    else console.log("REPEAT\n");
+    else console.log("\x1b[33mREPEAT\n"); // repeat wrong guess
     return false; // game still in play
 }
 
